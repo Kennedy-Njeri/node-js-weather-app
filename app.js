@@ -24,10 +24,18 @@ request({ url:url, json: true }, (error, response) => {
 
 // Geocoding
 
-// const map = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoia2VubmVkeTI1NCIsImEiOiJjazU1azYyczIwYXpwM25wbTJlOG9rcndkIn0.UjLXXvYXcGK0cHY6I23Brw&limit=1"
-//
-// request({url: map, json: true }, (error, response) => {
-//     const latitude = response.body.features[0].center[0]
-//     const longitude = response.body.features[0].center[1]
-//     console.log(`The latitude is ${latitude} and the longitude is ${longitude}`)
-// })
+const map = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoia2VubmVkeTI1NCIsImEiOiJjazU1azYyczIwYXpwM25wbTJlOG9rcndkIn0.UjLXXvYXcGK0cHY6I23Brw&limit=1"
+
+request({url: map, json: true }, (error, response) => {
+    if(error) {
+        console.log("Unable to connect to weather service!")
+    } else if (response.body.features.length === 0) {
+        console.log("Unable to find location. Please try another search!")
+    } else {
+        const latitude = response.body.features[0].center[0]
+        const longitude = response.body.features[0].center[1]
+        console.log(`The latitude is ${latitude} and the longitude is ${longitude}`)
+    }
+
+
+})
