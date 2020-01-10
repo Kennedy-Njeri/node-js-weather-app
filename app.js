@@ -1,4 +1,3 @@
-const request = require("request")
 const geocode = require("./utils/geocode")
 const forecast = require("./utils/forcast")
 
@@ -24,7 +23,7 @@ const forecast = require("./utils/forcast")
 // })
 
 
-// Geocoding
+// Geo coding
 
 // const map = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoia2VubmVkeTI1NCIsImEiOiJjazU1azYyczIwYXpwM25wbTJlOG9rcndkIn0.UjLXXvYXcGK0cHY6I23Brw&limit=1"
 //
@@ -45,11 +44,16 @@ const forecast = require("./utils/forcast")
 
 
 geocode('Nairobi', (error, data) => {
-    console.log("Error", error)
+    if(error) {
+        return console.log(error)
+    }
     console.log("Data", data)
+    forecast(data.latitude, data.longitude, (error, forecastData) => {
+        if(error) {
+            return console.log(error)
+        }
+        console.log(data.location)
+        console.log('Data', forecastData)
+    })
 })
 
-forecast(36.81667, -1.28333, (error, data) => {
-    console.log('Error', error)
-    console.log('Data', data)
-})
