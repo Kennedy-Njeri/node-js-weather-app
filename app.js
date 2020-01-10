@@ -56,11 +56,11 @@ const geoCode = (address, callback) => {
                 location: response.body.features[0].place_name
             })
         }
-
     })
 
 
 }
+
 
 geoCode('Nairobi', (error, data) => {
     console.log("Error", error)
