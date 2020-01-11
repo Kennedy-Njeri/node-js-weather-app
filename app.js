@@ -47,16 +47,16 @@ console.log(process.argv)
 if(!address) {
     console.log("Please provide an Address!")
 } else {
-    geocode(address, (error, data) => {
+    geocode(address, (error, {latitude, longitude, location}) => {
         if(error) {
             return console.log(error)
         }
-        console.log("Data", data)
-        forecast(data.latitude, data.longitude, (error, forecastData) => {
+        console.log("Data", {latitude, longitude})
+        forecast(latitude, longitude, (error, forecastData) => {
             if(error) {
                 return console.log(error)
             }
-            console.log(data.location)
+            console.log(location)
             console.log('Data', forecastData)
         })
     })
